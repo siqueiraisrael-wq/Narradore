@@ -1,0 +1,6 @@
+{
+  "name": "D&D Narrator Bot",
+  "description": "Narrador de aventuras D&D 5ª Edição baseado nas regras do Livro do Jogador, com criação canônica de personagens, compêndio oficial de regras e narrativa inteligente via Gemini.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
