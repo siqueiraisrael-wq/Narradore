@@ -112,6 +112,7 @@ async function startServer() {
         cdCustom,
         vantagem,
         desvantagem,
+        caminhoSeguroRevelado,
       } = req.body;
 
       if (!personagem || !acao) {
@@ -130,6 +131,20 @@ async function startServer() {
         atributo = avaliacao.atributo || atributo;
         cd = avaliacao.cd || cd;
         motivo = avaliacao.motivo;
+      }
+
+      // Se o caminho já foi revelado ou superado por outro jogador, zera a necessidade de teste
+      const ctxLower = (sessaoContexto || "").toLowerCase();
+      const acaoLower = (acao || "").toLowerCase();
+      const jaSuperado = caminhoSeguroRevelado || 
+        ctxLower.includes("caminho seguro") || 
+        ctxLower.includes("segredo desvendado") || 
+        ctxLower.includes("runa decifrada") ||
+        ctxLower.includes("glifo") ||
+        ctxLower.includes("desvendado");
+
+      if (jaSuperado && (acaoLower.includes("avançar") || acaoLower.includes("seguir") || acaoLower.includes("ir") || acaoLower.includes("passar") || acaoLower.includes("cruzar") || acaoLower.includes("caminhar") || acaoLower.includes("entrar"))) {
+        precisaTeste = false;
       }
 
       // 2. Se precisa de teste, rola dados D&D 5e

@@ -13,24 +13,24 @@ interface LobbyMesaProps {
 
 const TEMAS_AVENTURA = [
   {
-    titulo: "As Minas Perdidas de Phandelver",
-    desc: "Emboscada de goblins e os segredos de um pacto antigo em Faerûn.",
+    titulo: "Os Rumores da Taverna do Javali Saltitante",
+    desc: "Ao redor da lareira com cerveja e hidromel, o taverneiro e viajantes feridos relatam demônios atacando o santuário ao norte.",
+    icone: "🍺",
+  },
+  {
+    titulo: "O Gabinete do Alcaide em Porto Tempestade",
+    desc: "O prefeito convoca os heróis com urgência para organizar a defesa da cidade contra um ataque iminente de piratas.",
+    icone: "🏛️",
+  },
+  {
+    titulo: "A Audiência Real no Castelo de Pedra Alta",
+    desc: "Perante o trono do Rei Aldus, os heróis recebem a missão da coroa para deter um mal despertando nas criptas.",
+    icone: "👑",
+  },
+  {
+    titulo: "A Estalagem da Colina & As Minas de Phandelver",
+    desc: "O anão minerador Gundren Rockseeker divide pão e canecos na estalagem e propõe o contrato de escolta da expedição.",
     icone: "⛏️",
-  },
-  {
-    titulo: "A Maldição de Strahd nas Brumas de Baróvia",
-    desc: "Horror gótico, vampiros imortais e charadas mortais sob a névoa.",
-    icone: "🦇",
-  },
-  {
-    titulo: "A Tumba dos Horrores Ocultos",
-    desc: "Exploração de catacumbas ancestrais repletas de enigmas e armadilhas.",
-    icone: "💀",
-  },
-  {
-    titulo: "O Covil do Dragão de Cinzas",
-    desc: "Caçada nas montanhas escarpadas onde a fera alada aterroriza vilarejos.",
-    icone: "🐉",
   },
 ];
 

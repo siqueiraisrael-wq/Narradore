@@ -610,6 +610,41 @@ export const CONDICOES_DND: DndCondicaoInfo[] = [
   { nome: "Exaustão", descricao: "Nível 1: Desvantagem em perícias; Nível 2: Deslocamento / 2; Nível 3: Desvantagem em ataques/resistências; Nível 4: PV Máximo / 2; Nível 5: Deslocamento 0; Nível 6: Morte." }
 ];
 
+export const REGRAS_ESSENCIAIS_DND = {
+  tresPilares: [
+    {
+      titulo: "Exploração",
+      texto: "A exploração envolve o movimento pelo mundo e a investigação de locais desconhecidos, ruínas e masmorras."
+    },
+    {
+      titulo: "Interação Social",
+      texto: "A interação social ocorre quando os aventureiros conversam com PNJs, negociam, persuadem ou intimidam habitantes do mundo."
+    },
+    {
+      titulo: "Combate",
+      texto: "O combate é um confronto tático estruturado em turnos utilizando iniciativa, jogadas de ataque, dano e salvaguardas."
+    }
+  ],
+  regrasOuro: [
+    {
+      titulo: "Regra Específica sobre a Geral",
+      texto: "Se uma regra específica contradiz uma regra geral, a regra específica vence."
+    },
+    {
+      titulo: "Arredonde para Baixo",
+      texto: "Sempre que precisar dividir um número no jogo, arredonde para baixo, mesmo se a fração for 0,5 ou maior."
+    }
+  ],
+  escalaCD: [
+    { nivel: "Muito Fácil", cd: 5, desc: "Tarefa simples sem grande resistência" },
+    { nivel: "Fácil", cd: 10, desc: "Desafio básico para aventureiros iniciantes" },
+    { nivel: "Moderado", cd: 15, desc: "Desafio padrão para testes de perícia" },
+    { nivel: "Difícil", cd: 20, desc: "Tarefa complexa que exige especialização" },
+    { nivel: "Muito Difícil", cd: 25, desc: "Feito heroico de alto nível" },
+    { nivel: "Quase Impossível", cd: 30, desc: "Desafio lendário reservado a divindades ou mestres" }
+  ]
+};
+
 export const TABELA_XP_DND: { nivel: number; xpNecessario: number; bonusProf: number }[] = [
   { nivel: 1, xpNecessario: 0, bonusProf: 2 },
   { nivel: 2, xpNecessario: 300, bonusProf: 2 },

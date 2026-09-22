@@ -7,6 +7,9 @@ interface StoryFeedProps {
   personagem: Personagem | null;
   campanha: Campanha | null;
   isProcessing: boolean;
+  caminhoSeguroRevelado?: boolean;
+  onAvancarGrupoSeguro?: () => void;
+  onDecisaoDiferente?: (ator: Personagem | null) => void;
   onSelectSuggestion: (sugestao: { acao: string; cd?: number }) => void;
   onPedirOrientacao: () => Promise<void>;
 }
@@ -16,6 +19,9 @@ export function StoryFeed({
   personagem,
   campanha,
   isProcessing,
+  caminhoSeguroRevelado,
+  onAvancarGrupoSeguro,
+  onDecisaoDiferente,
   onSelectSuggestion,
   onPedirOrientacao,
 }: StoryFeedProps) {
@@ -26,25 +32,60 @@ export function StoryFeed({
   }, [mensagens, isProcessing]);
 
   return (
-    <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-6">
-      {/* Campaign Header banner */}
+    <div className="flex-1 overflow-y-auto p-2.5 sm:p-6 space-y-4 sm:space-y-6">
+      {/* Campaign Header banner - compact on mobile */}
       {campanha && (
-        <div className="p-4 rounded-xl bg-gradient-to-r from-amber-950/40 via-stone-900 to-amber-950/30 border border-amber-900/30 shadow-sm">
-          <div className="flex items-center gap-2 text-xs font-semibold text-amber-400 mb-1">
+        <div className="p-3 sm:p-4 rounded-xl bg-gradient-to-r from-amber-950/40 via-stone-900 to-amber-950/30 border border-amber-900/30 shadow-xs">
+          <div className="flex items-center gap-2 text-[11px] sm:text-xs font-semibold text-amber-400 mb-0.5 sm:mb-1">
             <Bookmark className="w-3.5 h-3.5" />
             <span>Aventura em Andamento</span>
             {campanha.source === "gemini" && (
               <span className="ml-auto text-[10px] px-2 py-0.5 rounded-full bg-emerald-950 text-emerald-300 border border-emerald-800">
-                Gemini 3.8 Flash
+                Gemini
               </span>
             )}
           </div>
-          <h2 className="text-base sm:text-lg font-bold font-serif text-amber-100">
+          <h2 className="text-sm sm:text-lg font-bold font-serif text-amber-100">
             {campanha.titulo}
           </h2>
-          <p className="text-xs text-stone-400 mt-1 line-clamp-2 italic">
+          <p className="text-[11px] sm:text-xs text-stone-400 mt-0.5 sm:mt-1 line-clamp-2 italic">
             {campanha.contexto}
           </p>
+        </div>
+      )}
+
+      {/* Caminho Seguro Revelado / Benefício Coletivo Banner */}
+      {caminhoSeguroRevelado && (
+        <div className="p-3.5 sm:p-4 rounded-xl bg-gradient-to-r from-amber-900/40 via-stone-900 to-amber-950/60 border-2 border-amber-500/60 shadow-lg space-y-2 animate-fadeIn">
+          <div className="flex items-center gap-2 text-xs font-bold text-amber-300">
+            <Sparkles className="w-4 h-4 text-amber-400 animate-pulse" />
+            <span>Segredo Exposto & Glifos Sagrados Decifrados (Benefício Coletivo)</span>
+          </div>
+          <p className="text-xs text-stone-300 leading-relaxed">
+            O teste do segredo/glifos já foi superado com sucesso por um membro do grupo. Ele não é mais necessário para os demais! Naturalmente, <strong>todo o grupo avança em segurança</strong> junto pelo caminho correto, a menos que alguém gaste um Ponto de Ação (ou Inspiração) para tomar uma decisão diferente.
+          </p>
+          <div className="flex flex-wrap items-center gap-2 pt-1">
+            {onAvancarGrupoSeguro && (
+              <button
+                type="button"
+                onClick={onAvancarGrupoSeguro}
+                className="px-3 py-1.5 rounded-lg bg-amber-600 hover:bg-amber-500 text-stone-950 text-xs font-bold transition-colors flex items-center gap-1.5 shadow cursor-pointer"
+              >
+                <Compass className="w-3.5 h-3.5" />
+                <span>Avançar Grupo Inteiro pelo Caminho Seguro</span>
+              </button>
+            )}
+            {onDecisaoDiferente && (
+              <button
+                type="button"
+                onClick={() => onDecisaoDiferente(personagem)}
+                className="px-3 py-1.5 rounded-lg bg-stone-800 hover:bg-stone-750 text-amber-200 text-xs font-semibold border border-amber-500/40 transition-colors flex items-center gap-1.5 cursor-pointer"
+              >
+                <Star className="w-3.5 h-3.5 text-amber-400" />
+                <span>Tomar Decisão Diferente ({personagem?.nome || "Herói"} - Gastar Ponto de Ação)</span>
+              </button>
+            )}
+          </div>
         </div>
       )}
 

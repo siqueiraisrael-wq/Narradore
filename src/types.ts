@@ -37,6 +37,8 @@ export interface Personagem {
   pvMax: number;
   pvAtual: number;
   pvTemp?: number;
+  incapacitado?: boolean;
+  turnosIncapacitadoRestantes?: number;
   ca: number;
   nivel: number;
   xp?: number;

@@ -397,33 +397,39 @@ DIRETRIZES FUNDAMENTAIS DO LIVRO DO JOGADOR:
 5. O ESPECÍFICO VENCE O GERAL (Capítulo 0):
    - Respeite as características raciais (Resiliência Anã, Visão no Escuro, Ancestral Feérico, Sortudo, etc.) e de classe (Fúria do Bárbaro, Retomar o Fôlego do Guerreiro, Ataque Furtivo do Ladino, etc.).
 
+6. O PONTO DE PARTIDA NATURAL DAS AVENTURAS (REGRA MANDATÓRIA):
+   - Toda aventura começa em um local comum e natural de encontro (como uma taverna agitada, estalagem, gabinete do prefeito, sala do trono ou acampamento de viajantes).
+   - NUNCA jogue os personagens diretamente na entrada da masmorra ou de frente para o perigo final.
+   - Apresente um PdM (taverneiro, mensageiro, prefeito, conselheiro) que traz os rumores ou a missão.
+   - Deixe os heróis conversarem, obterem detalhes, se equiparem e então decidirem partir rumo ao perigo.
+
 Retorne sempre JSON estrito válido em português do Brasil com descrições literárias ricas, sem floreios desnecessários fora do JSON.`;
 
-// Sementes clássicas inspiradas diretamente em passagens do Livro do Jogador (Cap. 0, 1, 4 e Apêndice C)
+// Sementes clássicas que começam em locais comuns e naturais (Tavernas, Gabinete do Alcaide, Sala Real)
 export const OFFLINE_SCENE_SEEDS = [
   {
-    titulo: "Os Portões do Castelo Ravenloft",
-    narrativa: "Depois de passar pelos picos escarpados da terra enevoada, a estrada dá uma guinada repentina para o leste e o Castelo Ravenloft surge adiante. Torres em ruínas mantêm uma vigília silenciosa sob o céu tempestuoso. Uma ponte levadiça de madeira apodrecida e aço corroído pela ferrugem atravessa o abismo sombrio, onde correntes rangem ao vento. Do alto da forte muralha, gárgulas de pedra encaram vocês com órbitas vazias e sorrisos petrificados, enquanto uma luz âmbar e quente escapa pelo arco do jardim interno.",
-    contexto: "Localização: Entrada do Castelo Ravenloft sobre o abismo. Ameaça: gárgulas vigilantes e a ponte levadiça instável. Objetivo: inspecionar as gárgulas e cruzar o abismo em segurança rumo ao pátio principal.",
-    livroReferencia: "Livro do Jogador, Introdução (pág. 5) - O Exemplo de Gareth e Riva em Ravenloft"
+    titulo: "A Taverna do Javali Saltitante: Os Rumores do Santuário",
+    narrativa: "O calor crepitante da grande lareira de pedra da Taverna do Javali Saltitante corta o vento gélido da noite lá fora. Canecos de cerveja preta e travessas fumegantes de carne assada passam de mesa em mesa sob risadas e canções rústicas de viajantes. Toblen, o robusto taverneiro de avental de linho e braços marcados pelo trabalho, apoia as duas mãos na mesa de vocês e fala em voz baixa e urgente: 'Aventureiros... se buscam moedas e glória, prestem atenção. Há menos de uma hora, dois mercadores chegaram feridos pela Estrada do Norte. Juram que o antigo santuário abandonado nas colinas foi tomado por entidades demoníacas com olhos em brasa, atacando viajantes. A guilda dos comerciantes e o templo local reuniram uma recompensa de 200 moedas de ouro para quem for até lá, investigar o santuário e dar fim ao mal.'",
+    contexto: "Localização: Taverna do Javali Saltitante, vila de Vallan. PdM Presente: Taverneiro Toblen com os rumores do ataque. Objetivo Inicial: Conversar com o taverneiro e os mercadores feridos, pedir detalhes da rota, preparar suprimentos e decidir quando partir rumo ao santuário no norte.",
+    livroReferencia: "Livro do Jogador, Capítulo 8 (pág. 185) - Interação Social e Ganchos de Aventura em Estalagens"
   },
   {
-    titulo: "A Marcha para o Salão de Mitral",
-    narrativa: "Nas encostas geladas do Vale do Vento Gélido, ventos uivantes castigam os penhascos de pedra cinzenta. Diante de vocês, oculta sob um manto de neve perpétua e runas anãs há séculos esquecidas, repousa uma fenda esculpida na rocha viva: a entrada secreta para o lendário Salão de Mitral. Ecos distantes de ferro martelado e o rugido abafado do dragão das sombras ressoam nas profundezas, convocando os bravos a retomar a honra de seus clãs.",
-    contexto: "Localização: Montanhas do Vale do Vento Gélido. Ameaça: batedores goblins e a presença do dragão das sombras. Objetivo: abrir os portões rúnicos e reaver o bastião dos anões.",
-    livroReferencia: "Livro do Jogador, Capítulos 1 e 4 (pág. 14, 18, 126) - A Saga de Bruenor Martelo de Batalha"
+    titulo: "O Gabinete do Alcaide em Porto Tempestade",
+    narrativa: "Do lado de fora das pesadas janelas de carvalho do gabinete municipal de Porto Tempestade, o vendaval marinho açoita o cais e a chuva torrencial bate forte nos vitrais. O Alcaide Harbin, com olheiras profundas de noites sem sono, caminha de um lado para o outro sobre o tapete desgastado antes de se voltar para vocês. 'Agradeço aos céus por terem atendido ao meu chamado!', exclama ele, batendo o anel de sinete sobre mapas náuticos abertos na mesa. 'Nossos batedores confirmaram: uma frota de corsários cruéis, aliados a aberrações marinhas das profundezas, está ancorada na enseada das rochas e planeja saquear os armazéns e queimar as docas da cidade nesta madrugada! A cidade oferece farto pagamento e salvo-conduto para quem assumir a defesa das barricadas ou se infiltrar para deter os invasores.'",
+    contexto: "Localização: Gabinete do Alcaide, Porto Tempestade. PdM Presente: Prefeito Harbin com mapas da enseada. Objetivo Inicial: Analisar os mapas táticos com o prefeito, acertar a recompensa municipal e planejar a estratégia antes de marchar para as docas.",
+    livroReferencia: "Livro do Jogador, Capítulos 4 e 8 (pág. 128) - Contratos Municipais e Alianças de Aventureiros"
   },
   {
-    titulo: "A Clareira da Crença Antiga na Floresta do Manto",
-    narrativa: "A floresta ancestral de Faerûn fecha-se em um teto verdejante que filtra a luz em feixes dourados de penumbra. Entre freixos e carvalhos sagrados, uma clareira circular revela um monólito druídico cravado com hieróglifos em Druídico. Pegadas de feras selvagens misturam-se a marcas calcinadas deixadas por cultistas corruptores. O ar cheira a azevinho fresco e ozônio pré-tormenta.",
-    contexto: "Localização: Floresta do Manto (Círculo da Terra). Ameaça: cultistas elementais corrompendo a seiva primordial. Objetivo: decifrar os avisos do monólito e proteger o bosque sagrado.",
-    livroReferencia: "Livro do Jogador, Capítulos 3 e 8 (pág. 71, 75, 187) - A Sabedoria dos Círculos Druídicos"
+    titulo: "A Audiência Real na Sala do Trono de Pedra Alta",
+    narrativa: "Sob os altos arcos ogivais e estandartes dourados da Sala do Trono da Cidadela de Pedra Alta, a guarda de honra mantém lanças erguidas em silêncio solene. Sentado no trono ancestral, o Rei Aldus faz um sinal para que o Arauto Real se aproxime da mesa onde vocês foram recebidos. 'Nobres aventureiros', proclama o soberano com voz firme, embora carregada de pesar. 'Um mal sepultado há três séculos despertou sob o antigo cemitério real das Criptas Orientais. Ecos de cânticos necromânticos e mortos-vivos foram vistos rondando os vilarejos camponeses. A coroa convoca a coragem e as lâminas de vocês para descer às criptas e destruir o horror que profana nossos ancestrais.'",
+    contexto: "Localização: Sala do Trono do Castelo de Pedra Alta. PdM Presente: Rei Aldus e Conselheiro Arcano Real. Objetivo Inicial: Ouvir as ordens do monarca, receber a bênção do reino e cavalos da cavalariça real antes de cavalgar rumo às criptas orientais.",
+    livroReferencia: "Livro do Jogador, Capítulos 1 e 4 (pág. 14, 18, 126) - Convocação Real e Juramento de Aventureiros"
   },
   {
-    titulo: "O Enigma do Pináculo de Sigil",
-    narrativa: "No coração das Terras Exteriores, sobre um pináculo de pedra colossal que desafia as alturas celestes, flutua a metrópole em forma de anel de Sigil, a lendária Cidade das Portas. Arcos de pedra cintilam com portais interdimensionais para o Plano Elemental e os Nove Infernos. Mensageiros encapuzados e mercadores de todos os planos negociam chaves mágicas em sussurros cautelosos sob a névoa luminosa.",
-    contexto: "Localização: Sigil, a Cidade das Portas (Terras Exteriores). Ameaça: agentes planares e chaves de portais instáveis. Objetivo: decifrar o código de um portal antes que mercenários rivais o atravessem.",
-    livroReferencia: "Livro do Jogador, Apêndice C: Os Planos de Existência (pág. 301-303)"
+    titulo: "A Estalagem da Colina da Pedra em Phandalin",
+    narrativa: "O aroma acolhedor de ensopado de carne e pão fresco enche a sala comum da Estalagem da Colina da Pedra. Sentado à mesa com vocês, o anão Gundren Rockseeker dá uma risada rouca e dá uma palmada amigável na mesa de madeira rústica, deslizando um pergaminho selado em cera vermelha. 'Meus amigos! Encontrei algo que mudará nossas vidas para sempre', diz ele em tom conspiratório. 'As lendas sobre a Caverna do Eco das Ondas e as Minas Perdidas são reais! Preciso que vocês escoltem minha carroça de suprimentos até a cidadezinha e protejam nosso caminho de bandidos e trasgos. O pagamento é farto e a glória é eterna!'",
+    contexto: "Localização: Estalagem da Colina da Pedra, Phandalin. PdM Presente: Minerador Anão Gundren Rockseeker. Objetivo Inicial: Analisar o mapa e o contrato de escolta de Gundren, abastecer os alforjes e iniciar a viagem de escolta pela Trilha Alta.",
+    livroReferencia: "Livro do Jogador, Capítulos 1 e 5 (pág. 143) - Contratos de Expedição e Comércio"
   }
 ];
 
@@ -611,6 +617,26 @@ export function calcularPersonagemOffline(
 
 export function sugerirAcoesOffline(contexto: string = ""): Array<{ acao: string; atributo: string; cd: number; risco: string }> {
   const ctx = (contexto || "").toLowerCase();
+
+  // Se estiver no ponto de encontro inicial (taverna, estalagem, gabinete, sala real)
+  if (
+    ctx.includes("taverna") ||
+    ctx.includes("estalagem") ||
+    ctx.includes("gabinete") ||
+    ctx.includes("alcaide") ||
+    ctx.includes("prefeito") ||
+    ctx.includes("rei") ||
+    ctx.includes("trono") ||
+    ctx.includes("rumor") ||
+    ctx.includes("encontro")
+  ) {
+    return [
+      { acao: "Perguntar ao informante mais detalhes sobre a rota e o perigo relatado", atributo: "Carisma", cd: 10, risco: "baixo" },
+      { acao: "Pedir mantimentos, examinar o mapa da região e ouvir conversas dos viajantes", atributo: "Sabedoria", cd: 11, risco: "baixo" },
+      { acao: "Aceitar a missão, reunir os equipamentos e partir com o grupo rumo ao destino", atributo: "Força", cd: 10, risco: "baixo" }
+    ];
+  }
+
   const sugestoes = [
     { acao: "Investigar a área em busca de símbolos ocultos ou rastros", atributo: "Inteligência", cd: 12, risco: "baixo" },
     { acao: "Avançar com a arma empunhada mantendo postura defensiva", atributo: "Força", cd: 13, risco: "médio" },
@@ -646,6 +672,31 @@ export function getGeminiClient(): GoogleGenAI | null {
   return genaiClient;
 }
 
+// Helper robusto para tentar modelos gemini e lidar com 503 / alta demanda
+async function callGeminiWithRetry(ai: GoogleGenAI, params: any) {
+  const modelsToTry = ["gemini-3.8-flash", "gemini-flash-latest"];
+  let lastError: any = null;
+
+  for (const modelName of modelsToTry) {
+    try {
+      const response = await ai.models.generateContent({
+        ...params,
+        model: modelName,
+      });
+      return response;
+    } catch (err: any) {
+      lastError = err;
+      const msg = err?.message || String(err);
+      if (msg.includes("503") || msg.includes("UNAVAILABLE") || msg.includes("429") || msg.includes("high demand")) {
+        console.warn(`Modelo ${modelName} temporariamente indisponível (503/429), tentando alternativa...`);
+        continue;
+      }
+      throw err;
+    }
+  }
+  throw lastError;
+}
+
 // Limpeza de resposta JSON de LLM
 function cleanJsonResponse(rawText: string): any {
   if (!rawText) throw new Error("Resposta vazia da IA");
@@ -671,17 +722,26 @@ export async function iniciarAventuraAI(promptCustom?: string): Promise<{ titulo
   const ai = getGeminiClient();
   if (ai) {
     try {
-      const prompt = `Crie uma introdução de aventura de RPG D&D 5e em português do Brasil com atmosfera imersiva, fantasia clássica, mistério ou perigo iminente.
+      const prompt = `Você é o Mestre de RPG de D&D 5ª Edição narrando o início de uma nova aventura.
+DIRETRIZ OBRIGATÓRIA DE PONTO DE PARTIDA (LIVRO DO JOGADOR & TRADIÇÃO DO D&D):
+- A aventura NUNCA deve começar na entrada da masmorra ou de frente para o chefe/perigo final!
+- A aventura DEVE COMEÇAR SEMPRE em um lugar comum e natural de encontro dos aventureiros:
+  * Em uma taverna ou estalagem acolhedora da vila/cidade (ex: Taverna do Javali Saltitante, O Dragão Verde), ao redor da lareira com canecos de cerveja e hidromel, onde o taverneiro ou viajantes feridos relatam rumores e notícias de perigos distantes (ex: monstros atacando viajantes ao norte, demônios nas ruínas antigas).
+  * No gabinete/escritório do alcaide ou prefeito da cidade, convocando os heróis para organizar a defesa ou investigar ameaças contra o povoado.
+  * Na sala de audiência ou corte do rei / nobre local, que reúne forças heroicas para conter um mal que se ergue nas criptas.
+  * Em um acampamento ou caravana comercial onde os heróis aceitam a proposta de escolta ou exploração.
+- O início deve apresentar o local vivo (sons, cheiros, calor), o informante/PdM que traz a notícia ou contrata o grupo, e deixar os personagens prontos para conversar, se preparar e então decidir partir pela estrada rumo ao local da aventura!
+
 ${promptCustom ? `Tema ou inspiração solicitada: ${promptCustom}` : ""}
+
 Retorne estritamente um JSON com a seguinte estrutura:
 {
   "titulo": "Nome épico da aventura",
-  "narrativa": "Descrição imersiva da cena inicial (2 a 3 parágrafos ricos em detalhes sensoriais, sons, clima e um dilema imediato)",
-  "contexto": "Localização, ameaça presente e objetivo inicial claro"
+  "narrativa": "Descrição imersiva da cena inicial no local de encontro comum (2 a 3 parágrafos ricos em detalhes sensoriais, sons do ambiente, fala do informante/taverneiro/nobre e a apresentação da missão)",
+  "contexto": "Localização inicial (ex: Taverna na vila, Gabinete do Alcaide), PdM presente com a missão, e objetivo inicial (ex: conversar com o informante, preparar equipamentos e decidir a partida rumo à aventura)"
 }`;
 
-      const response = await ai.models.generateContent({
-        model: "gemini-3.8-flash",
+      const response = await callGeminiWithRetry(ai, {
         contents: prompt,
         config: {
           systemInstruction: SYSTEM_PROMPT,
@@ -695,7 +755,7 @@ Retorne estritamente um JSON com a seguinte estrutura:
         return { ...parsed, source: "gemini" };
       }
     } catch (e) {
-      console.warn("Gemini indisponível para iniciar aventura, acionando fallback offline resiliente:", e);
+      console.warn("Gemini indisponível para iniciar aventura, acionando fallback offline resiliente.");
     }
   }
 
@@ -759,8 +819,7 @@ Retorne estritamente o JSON:
   "tracos": ["Habilidade chave 1", "Traço racial 1"]
 }`;
 
-      const response = await ai.models.generateContent({
-        model: "gemini-3.8-flash",
+      const response = await callGeminiWithRetry(ai, {
         contents: prompt,
         config: {
           systemInstruction: SYSTEM_PROMPT,
@@ -823,7 +882,7 @@ Retorne estritamente o JSON:
         };
       }
     } catch (e) {
-      console.warn("Gemini falhou na criação de personagem, usando offline:", e);
+      console.warn("Gemini falhou na criação de personagem, usando offline.");
     }
   }
 
@@ -839,13 +898,31 @@ export async function avaliarAcaoAI(contexto: string, acao: string): Promise<{ p
   const atributoDetectado = detectarAtributo(acao) || "Destreza";
   const acaoLower = acao.toLowerCase();
 
-  const acoesSimples = ["olhar", "andar", "avançar", "caminhar", "falar", "perguntar", "ouvir", "sentar", "esperar", "respirar"];
-  const ehSimples = acoesSimples.some(s => acaoLower.startsWith(s) || acaoLower.includes(`apenas ${s}`));
+  const acoesSimples = [
+    "olhar", "andar", "avançar", "caminhar", "falar", "perguntar", "ouvir", "sentar", "esperar", "respirar",
+    "ir", "seguir", "observar", "virar", "escolher", "passar", "entrar", "subir", "descer", "direita", "esquerda", "corredor", "porta", "examinar",
+    "beber", "pedir", "conversar", "taverneiro", "partir", "viajar", "sair", "estrada", "aceitar", "preparar", "comprar", "norte", "sul", "leste", "oeste"
+  ];
+  
+  // Se for uma ação simples e não envolver combate, armadilha ativa ou perícia complexa
+  const ehSimples = acoesSimples.some(s => acaoLower.includes(s)) && 
+    !acaoLower.includes("atacar") && 
+    !acaoLower.includes("decifrar") && 
+    !acaoLower.includes("desarmar") && 
+    !acaoLower.includes("lutar") && 
+    !acaoLower.includes("esquivar") &&
+    !acaoLower.includes("forçar") &&
+    !acaoLower.includes("arrombar");
 
   const ai = getGeminiClient();
-  if (ai) {
+  if (ai && !ehSimples) {
     try {
       const prompt = `Avalie se a ação do jogador no D&D 5e requer uma rolagem de dados (teste de atributo / CD) ou se é uma ação rotineira/simples sem risco.
+REGRAS IMPORTANTES:
+- Ações simples como andar, caminhar, olhar, escolher um caminho (ex: "ir pela direita", "seguir pelo corredor da esquerda"), abrir uma porta destrancada ou conversar APENAS ACONTECEM sem teste de dados ("precisa_teste": false). Cabe ao narrador dar a continuidade e revelar o que há à frente.
+- Interações sociais de início de aventura (conversar com o taverneiro, pedir rumores aos viajantes, aceitar o contrato com o alcaide/rei, beber cerveja, comprar provisões, sair da taverna e pegar a estrada para viajar) NÃO exigem rolagem de dados ("precisa_teste": false). O Mestre deve narrar o diálogo, conceder as informações e conduzir a viagem.
+- Testes de dados ("precisa_teste": true) são exigidos APENAS para atos sob pressão ou que requerem perícia/habilidade técnica complexa (ex: decifrar código arcano, esquivar de flecha, arrombar fechadura complexa, atacar em combate).
+
 Contexto da cena: ${contexto}
 Ação declarada pelo jogador: ${acao}
 
@@ -857,8 +934,7 @@ Retorne estritamente o JSON:
   "motivo": "Breve justificativa técnica em 1 frase"
 }`;
 
-      const response = await ai.models.generateContent({
-        model: "gemini-3.8-flash",
+      const response = await callGeminiWithRetry(ai, {
         contents: prompt,
         config: {
           systemInstruction: SYSTEM_PROMPT,
@@ -870,22 +946,22 @@ Retorne estritamente o JSON:
       const parsed = cleanJsonResponse(response.text || "");
       if (typeof parsed.precisa_teste === "boolean") {
         return {
-          precisa_teste: parsed.precisa_teste,
+          precisa_teste: ehSimples ? false : parsed.precisa_teste,
           atributo: parsed.atributo || atributoDetectado,
           cd: parsed.cd || 12,
           motivo: parsed.motivo || "Avaliação do Mestre",
         };
       }
     } catch (e) {
-      console.warn("Gemini offline para avaliar ação:", e);
+      console.warn("Gemini offline para avaliar ação.");
     }
   }
 
   return {
-    precisa_teste: !ehSimples,
+    precisa_teste: ehSimples ? false : !acoesSimples.some(s => acaoLower.includes(s)),
     atributo: atributoDetectado,
     cd: 12,
-    motivo: ehSimples ? "Ação simples sem oposição imediata." : "Ação arriscada que desafia o ambiente ou adversários.",
+    motivo: ehSimples ? "Ação simples de movimentação ou observação que acontece diretamente sem rolagem." : "Ação arriscada que desafia o ambiente ou adversários.",
   };
 }
 
@@ -910,11 +986,19 @@ ${teste ? `Teste de D&D 5e realizado: Atributo ${teste.atributo} (Modificador: $
 Resultado mecânico do dado: ${teste.critico_sucesso ? "SUCESSO CRÍTICO (Natural 20)!" : teste.falha_critica ? "FALHA CRÍTICA (Natural 1)!" : teste.sucesso ? "SUCESSO!" : "FALHA!"}.` : "Nenhum teste de dado foi necessário (ação automática ou sem risco)."}
 
 DIRETRIZES FUNDAMENTAIS PARA A NARRATIVA, BONIFICAÇÃO E PENALIDADE DE TURNO:
-1. AÇÃO LIVRE DO JOGADOR: Responda diretamente e com fidelidade ao que o jogador tentou fazer (ex: decifrar símbolos ritualísticos, inspecionar um altar, desarmar uma armadilha, encontrar passagens secretas, interrogar um inimigo, usar magia ou o cenário).
-2. REGRA MANDATÓRIA DE BONIFICAÇÃO POR SUCESSO:
-   - Se o teste foi SUCESSO ou SUCESSO CRÍTICO: Você DEVE conceder uma BONIFICAÇÃO CONCRETA ao jogador ("bonificacao")!
-   - Exemplo clássico: Se o jogador tenta decifrar símbolos ritualísticos, runas, glifos ou línguas antigas e PASSOU no teste: a bonificação DEVE revelar o significado do ritual e DIZER EXATAMENTE O CAMINHO CERTO OU SEGURO A FAZER (ex: qual passagem seguir, qual alavanca puxar, qual ordem de tochas acender para evitar a armadilha ou como abrir a porta sem despertar os monstros)!
-   - Outros exemplos: rotas seguras, fraquezas descobertas, itens encontrados.
+1. ESPELHO DA AÇÃO E RESULTADO DA ROLAGEM (SUCESSO, CRÍTICO, FALHA E FALHA CRÍTICA):
+   - O resultado do dado DEVE refletir e cumprir diretamente a ação exata declarada pelo jogador.
+   - Exemplo clássico de Cura/Magia:
+     * Sucesso: O personagem executa a magia ou habilidade com competência e obtém seu efeito positivo proporcional (ex: recuperação moderada de HP).
+     * Sucesso Crítico (Natural 20): Efeito supremo extraordinário! (ex: se tentou cura, recupera HP máximo completo e revitaliza os aliados da party; se tentou ataque, causa dano máximo e atordoamento).
+     * Falha: A ação não surte o efeito desejado, nada acontece e o personagem perde o turno.
+     * Falha Crítica (Natural 1): Consequência reversa ou bizarra desastrosa! (ex: se tentou magia de cura, se atrapalha com as palavras arcanas e acaba conjurando veneno ou refluxo arcano em si mesmo, sofrendo dano e perdendo o turno).
+   - O Mestre adapta criativamente o desfecho (cura, dano, condições, vantagens) conforme o contexto exato da solicitação do jogador.
+2. REGRA MANDATÓRIA DE BONIFICAÇÃO POR SUCESSO (ALINHAMENTO EXATO COM A AÇÃO):
+   - Se o teste foi SUCESSO ou SUCESSO CRÍTICO: Você DEVE conceder uma BONIFICAÇÃO CONCRETA ao jogador ("bonificacao") que esteja ESTRITAMENTE ALINHADA à ação executada:
+     * Ações de Cura/Magia: Bonificação de PV temporário, proteção arcana ou regeneração de feitiços (tipo: 'vantagem_tatica' ou 'item_ou_recurso'). NUNCA dê revelação de caminho por ter curado a si mesmo.
+     * Ações de Investigação/Inspeção/Decifrar Runas: Bonificação de revelação do caminho certo, rotas seguras ou segredos desvendados (tipo: 'revelacao_caminho' ou 'segredo_desvendado').
+     * Ações de Ataque/Combate: Bonificação de vantagem tática ou fraqueza descoberta (tipo: 'vantagem_tatica').
    - Nesse caso, "penalidadeFalha": null.
 3. REGRA MANDATÓRIA DE FALHA (ALGO RUIM ACONTECE E O JOGADOR PERDE O TURNO):
    - Se o teste de d20 resultar em FALHA ou FALHA CRÍTICA:
@@ -947,6 +1031,9 @@ DIRETRIZES FUNDAMENTAIS PARA A NARRATIVA, BONIFICAÇÃO E PENALIDADE DE TURNO:
      }
 5. NOVO CONTEXTO:
    - Atualize a cena no "novo_contexto", registrando o que mudou, o dano sofrido ou o caminho aberto para manter a continuidade da aventura.
+6. PROGRESSÃO NARRATIVA NATURAL (DA TAVERNA/REUNIÃO RUMO AO DESTINO):
+   - Se os personagens estão no ponto de encontro inicial (taverna, gabinete do prefeito, sala do rei) e conversam com o PdM, pedem detalhes ou aceitam o acordo: narre a resposta detalhada do PdM com as pistas e a rota recomendada.
+   - Quando o grupo decide 'partir', 'sair da taverna', 'pegar a estrada', 'viajar rumo ao norte/santuário/docas': NARRE a partida do grupo, a transição da marcha pelas terras selvagens e a chegada imersiva ao perímetro da aventura! Atualize o 'novo_contexto' refletindo a nova localização e o avanço da história.
 
 Retorne estritamente o JSON:
 {
@@ -977,8 +1064,7 @@ Retorne estritamente o JSON:
   ]
 }`;
 
-      const response = await ai.models.generateContent({
-        model: "gemini-3.8-flash",
+      const response = await callGeminiWithRetry(ai, {
         contents: prompt,
         config: {
           systemInstruction: SYSTEM_PROMPT,
@@ -1005,7 +1091,7 @@ Retorne estritamente o JSON:
         };
       }
     } catch (e) {
-      console.warn("Gemini offline para narrar ação, usando fallback local:", e);
+      console.warn("Gemini offline para narrar ação, usando fallback local.");
     }
   }
 
@@ -1058,6 +1144,37 @@ Retorne estritamente o JSON:
           descricao: `Sua inspeção minuciosa detecta uma junta oca e um leve fluxo de ar na parede de cantaria. Você descobre a alavanca de pedra oculta que destranca um atalho seguro, contornando a patrulha e os perigos da câmara principal.`,
           efeitoMecanico: "Atalho seguro desvendado: você ganha Vantagem para surpreender qualquer sentinela à frente.",
           caminhoSugerido: "Aciono a alavanca oculta e avanço furtivamente pelo atalho desvendado",
+        };
+      } else if (
+        acaoLower.includes("cura") ||
+        acaoLower.includes("curar") ||
+        acaoLower.includes("prece") ||
+        acaoLower.includes("feitiço") ||
+        acaoLower.includes("magia")
+      ) {
+        bonificacaoOffline = {
+          tipo: "item_ou_recurso",
+          titulo: "Canalização Restauradora: Vigor Regenerado",
+          descricao: `A energia curativa flui com pureza pelos canais mágicos, aliviando dores e revigorando a constituição de ${personagem.nome}.`,
+          efeitoMecanico: "Recuperação imediata de Pontos de Vida e alívio de fadiga.",
+          caminhoSugerido: "Reorganizar a postura e dar cobertura aos aliados com o vigor renovado",
+        };
+      } else if (
+        acaoLower.includes("taverneiro") ||
+        acaoLower.includes("perguntar") ||
+        acaoLower.includes("conversar") ||
+        acaoLower.includes("informação") ||
+        acaoLower.includes("rumor") ||
+        acaoLower.includes("alcaide") ||
+        acaoLower.includes("prefeito") ||
+        acaoLower.includes("rei")
+      ) {
+        bonificacaoOffline = {
+          tipo: "segredo_desvendado",
+          titulo: "Pistas Valiosas & Localização Revelada",
+          descricao: `O informante fica impressionado com sua postura e compartilha segredos valiosos: pontos de referência na estrada do norte e a vulnerabilidade das criaturas relatadas.`,
+          efeitoMecanico: "Vantagem no próximo teste de navegação e percepção durante a marcha.",
+          caminhoSugerido: "Preparar a bagagem e partir com o grupo pela trilha indicada",
         };
       } else if (
         acaoLower.includes("atacar") ||
@@ -1122,7 +1239,33 @@ Retorne estritamente o JSON:
       }
     }
   } else {
-    desfecho = `${personagem.nome} avança com cuidado: "${acao}". A manobra transcorre sem percalços imediatos, revelando novos ângulos da câmara sob o silêncio tenso.`;
+    if (
+      acaoLower.includes("taverna") ||
+      acaoLower.includes("taverneiro") ||
+      acaoLower.includes("beber") ||
+      acaoLower.includes("cerveja") ||
+      acaoLower.includes("perguntar") ||
+      acaoLower.includes("conversar") ||
+      acaoLower.includes("ouvir") ||
+      acaoLower.includes("rumor") ||
+      acaoLower.includes("alcaide") ||
+      acaoLower.includes("prefeito") ||
+      acaoLower.includes("rei")
+    ) {
+      desfecho = `${personagem.nome} se aproxima e dialoga com calma: "${acao}". Com um aceno grave de cabeça, o informante compartilha os detalhes cruciais que ouviu dos viajantes feridos, descrevendo a silhueta das criaturas e o caminho pelas colinas até o santuário ao norte. O grupo agora tem pistas sólidas.`;
+    } else if (
+      acaoLower.includes("partir") ||
+      acaoLower.includes("sair") ||
+      acaoLower.includes("estrada") ||
+      acaoLower.includes("viajar") ||
+      acaoLower.includes("norte") ||
+      acaoLower.includes("rumo") ||
+      acaoLower.includes("iniciar viagem")
+    ) {
+      desfecho = `O grupo reúne suas mochilas, tochas e armas, despedindo-se do acolhimento da sala comum para pegar a estrada: "${acao}". Após uma marcha determinada enfrentando o vento frio das colinas ao norte, vocês avistam no horizonte o contorno sombrio e as velhas pedras do santuário ancestral. A aventura avança para o próximo estágio!`;
+    } else {
+      desfecho = `${personagem.nome} avança com cuidado: "${acao}". A manobra transcorre sem percalços imediatos, mantendo a coesão do grupo no ambiente.`;
+    }
   }
 
   const novoCtx = `${sessaoContexto} Última ação de ${personagem.nome}: ${acao}. ${bonificacaoOffline ? `Bonificação: ${bonificacaoOffline.titulo}.` : ''} ${penalidadeOffline ? `Penalidade: ${penalidadeOffline.titulo}.` : ''} Desfecho registrado.`;
@@ -1174,8 +1317,7 @@ Retorne estritamente o JSON:
   ]
 }`;
 
-      const response = await ai.models.generateContent({
-        model: "gemini-3.8-flash",
+      const response = await callGeminiWithRetry(ai, {
         contents: prompt,
         config: {
           systemInstruction: SYSTEM_PROMPT,
@@ -1192,8 +1334,8 @@ Retorne estritamente o JSON:
           source: "gemini" as const,
         };
       }
-    } catch (e) {
-      console.warn("Gemini falhou ao gerar orientação para desfecho:", e);
+    } catch (e: any) {
+      console.info("Gemini temporariamente indisponível para orientação de desfecho, acionando fallback offline resiliente.");
     }
   }
 

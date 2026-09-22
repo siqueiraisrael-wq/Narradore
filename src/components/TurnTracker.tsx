@@ -106,7 +106,12 @@ export function TurnTracker({
                     <span className="text-xs font-bold truncate leading-snug">
                       {p.nome}
                     </span>
-                    {ehVezAtiva && (
+                    {p.incapacitado && (
+                      <span className="px-1.5 py-0.2 rounded bg-red-950 text-red-300 text-[9px] font-bold border border-red-700/50 animate-pulse">
+                        Incapacitado ({p.turnosIncapacitadoRestantes ?? 5}t)
+                      </span>
+                    )}
+                    {ehVezAtiva && !p.incapacitado && (
                       <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-ping" />
                     )}
                   </div>

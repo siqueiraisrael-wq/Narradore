@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Header } from "./components/Header";
+import { Sidebar } from "./components/Sidebar";
 import { TurnTracker } from "./components/TurnTracker";
 import { IniciativaModal } from "./components/IniciativaModal";
 import { StoryFeed } from "./components/StoryFeed";
@@ -209,6 +210,58 @@ export default function App() {
   const [aiStatus, setAiStatus] = useState<{ provider: string; hasKey: boolean } | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
 
+  // Estado de Caminho Seguro Revelado por Segredo / Glifos Sagrados (Benefício Coletivo)
+  const [caminhoSeguroRevelado, setCaminhoSeguroRevelado] = useState<boolean>(() => {
+    return localStorage.getItem("dnd_caminho_seguro_revelado") === "true";
+  });
+
+  const [salaDungeon, setSalaDungeon] = useState<number>(() => {
+    const saved = localStorage.getItem("dnd_sala_dungeon");
+    return saved ? Number(saved) : 1;
+  });
+
+  useEffect(() => {
+    localStorage.setItem("dnd_caminho_seguro_revelado", String(caminhoSeguroRevelado));
+  }, [caminhoSeguroRevelado]);
+
+  useEffect(() => {
+    localStorage.setItem("dnd_sala_dungeon", String(salaDungeon));
+  }, [salaDungeon]);
+
+  const handleAvancarGrupoSeguro = () => {
+    const proximaSala = Math.min(4, salaDungeon + 1);
+    setSalaDungeon(proximaSala);
+    setCaminhoSeguroRevelado(false);
+
+    const nomesAtos = [
+      "Ato I: O Ponto de Encontro",
+      "Ato II: A Jornada pelas Terras Selvagens",
+      "Ato III: A Entrada do Santuário / Perímetro",
+      "Ato IV: O Clímax & O Covil da Ameaça"
+    ];
+
+    const msgGrupo: MensagemNarrativa = {
+      id: Math.random().toString(36).substring(2, 9),
+      timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
+      tipo: "mestre",
+      titulo: `Avanço Coletivo: ${nomesAtos[proximaSala - 1]}`,
+      conteudo: `Como o segredo dos glifos e o caminho certo já foram desvendados por um dos heróis, **todo o grupo de aventureiros avança junto e em segurança**, marchando firme rumo a **${nomesAtos[proximaSala - 1]}**! A travessia é realizada em sincronia, superando a etapa anterior.`,
+    };
+    setMensagens((prev) => [...prev, msgGrupo]);
+    avancarParaProximoTurno();
+  };
+
+  const handleDecisaoDiferente = (ator: Personagem | null) => {
+    if (!ator) return;
+    const msg: MensagemNarrativa = {
+      id: Math.random().toString(36).substring(2, 9),
+      timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
+      tipo: "sistema",
+      conteudo: `⚡ ${ator.nome} (${ator.jogadorNome || "Jogador"}) gasta um Ponto de Ação / Inspiração para romper com o consenso do grupo e tomar uma decisão individual e diferente no salão!`,
+    };
+    setMensagens((prev) => [...prev, msg]);
+  };
+
   // Modals state
   const [isCharacterSheetOpen, setIsCharacterSheetOpen] = useState(false);
   const [isCharacterCreatorOpen, setIsCharacterCreatorOpen] = useState(false);
@@ -216,6 +269,7 @@ export default function App() {
   const [isTelegramConsoleOpen, setIsTelegramConsoleOpen] = useState(false);
   const [isLivroModalOpen, setIsLivroModalOpen] = useState(false);
   const [isIniciativaModalOpen, setIsIniciativaModalOpen] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   // Personagem ativo no momento
   const personagemAtivo = personagens[personagemAtivoIndex] || personagens[0] || null;
@@ -279,6 +333,8 @@ export default function App() {
           dataCriacao: new Date().toISOString(),
         };
         setCampanha(novaCampanha);
+        setSalaDungeon(1);
+        setCaminhoSeguroRevelado(false);
 
         const welcomeMsg: MensagemNarrativa = {
           id: Math.random().toString(36).substring(2, 9),
@@ -353,6 +409,29 @@ export default function App() {
   // Função para avançar o turno de forma sequencial entre jogadores simultâneos
   const avancarParaProximoTurno = (motivo?: "falha" | "sucesso" | "passou") => {
     if (personagens.length === 0) return;
+
+    // Decrementa turnos de incapacitação dos personagens incapacitados
+    setPersonagens((prev) =>
+      prev.map((p) => {
+        if (p.incapacitado) {
+          const restantes = (p.turnosIncapacitadoRestantes ?? 5) - 1;
+          if (restantes <= 0) {
+            const pvRevamp = Math.floor((p.pvMax || 10) * 0.3);
+            return {
+              ...p,
+              pvAtual: Math.max(1, pvRevamp),
+              incapacitado: false,
+              turnosIncapacitadoRestantes: 0,
+            };
+          }
+          return {
+            ...p,
+            turnosIncapacitadoRestantes: restantes,
+          };
+        }
+        return p;
+      })
+    );
 
     const charAtual = personagens[personagemAtivoIndex];
     const charId = charAtual?.id || `char-${personagemAtivoIndex}`;
@@ -441,6 +520,42 @@ export default function App() {
       return;
     }
 
+    const acaoLower = acao.toLowerCase();
+    const ehAcaoAjuda = acaoLower.includes("ajudar") || acaoLower.includes("socorrer") || acaoLower.includes("levantar") || acaoLower.includes("curar") || acaoLower.includes("auxiliar") || acaoLower.includes("salvar");
+
+    if (ator.incapacitado) {
+      if (!ehAcaoAjuda) {
+        setMensagens((prev) => [
+          ...prev,
+          {
+            id: Math.random().toString(36).substring(2, 9),
+            timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
+            tipo: "sistema",
+            conteudo: `⚠️ ${ator.nome} está incapacitado (0 PV) e não pode agir! Aguarde o término dos 5 turnos de recuperação ou peça para um companheiro vir ajudá-lo.`,
+          },
+        ]);
+        return;
+      }
+    }
+
+    // Se um companheiro foi ajudar/socorrer, revitaliza todos os incapacitados com 30% do HP max
+    if (ehAcaoAjuda) {
+      setPersonagens((prev) =>
+        prev.map((p) => {
+          if (p.incapacitado || p.pvAtual <= 0) {
+            const pvRevamp = Math.floor((p.pvMax || 10) * 0.3);
+            return {
+              ...p,
+              pvAtual: Math.max(1, pvRevamp),
+              incapacitado: false,
+              turnosIncapacitadoRestantes: 0,
+            };
+          }
+          return p;
+        })
+      );
+    }
+
     const playerMsg: MensagemNarrativa = {
       id: Math.random().toString(36).substring(2, 9),
       timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
@@ -462,6 +577,7 @@ export default function App() {
           acao,
           vantagem: opts?.vantagem,
           desvantagem: opts?.desvantagem,
+          caminhoSeguroRevelado,
         }),
       });
 
@@ -525,13 +641,39 @@ export default function App() {
 
         // NO CASO DE FALHA: Algo RUIM acontece e o jogador PERDE O TURNO!
         if (falhou) {
-          // Desconta PV do personagem atual caso haja dano sofrido
-          if (penalidade?.danoSofrido && penalidade.danoSofrido > 0) {
+          const acaoLower = acao.toLowerCase();
+          const ehCura = acaoLower.includes("curar") || acaoLower.includes("cura") || acaoLower.includes("vida") || acaoLower.includes("hp");
+          
+          if (ehCura && teste?.falha_critica) {
+            setPersonagens((prev) =>
+              prev.map((p, idx) => {
+                if (idx === atorIndex) {
+                  const danoRefluxo = 5;
+                  const novoPv = Math.max(0, p.pvAtual - danoRefluxo);
+                  const incapacitado = novoPv <= 0;
+                  return {
+                    ...p,
+                    pvAtual: novoPv,
+                    incapacitado,
+                    turnosIncapacitadoRestantes: incapacitado && !p.incapacitado ? 5 : (incapacitado ? (p.turnosIncapacitadoRestantes ?? 5) : 0),
+                  };
+                }
+                return p;
+              })
+            );
+          } else if (penalidade?.danoSofrido && penalidade.danoSofrido > 0) {
+            // Desconta PV do personagem atual caso haja dano sofrido
             setPersonagens((prev) =>
               prev.map((p, idx) => {
                 if (idx === atorIndex) {
                   const novoPv = Math.max(0, p.pvAtual - penalidade.danoSofrido!);
-                  return { ...p, pvAtual: novoPv };
+                  const incapacitado = novoPv <= 0;
+                  return {
+                    ...p,
+                    pvAtual: novoPv,
+                    incapacitado,
+                    turnosIncapacitadoRestantes: incapacitado && !p.incapacitado ? 5 : (incapacitado ? (p.turnosIncapacitadoRestantes ?? 5) : 0),
+                  };
                 }
                 return p;
               })
@@ -550,7 +692,7 @@ export default function App() {
             : {
                 titulo: "Falha no Teste: Consequência Hostil & Turno Perdido",
                 descricao: `A ação de ${ator.nome} falhou contra a CD ${teste.dificuldade}. As forças do ambiente reagem contra você e seu turno é perdido!`,
-                danoSofrido: 2,
+                danoSofrido: ehCura && teste?.falha_critica ? 5 : 2,
                 perdeuTurno: true,
                 proximoJogadorNome: proximoJogador?.nome,
               };
@@ -570,6 +712,97 @@ export default function App() {
           avancarParaProximoTurno("falha");
         } else {
           // SUCESSO: Concede Bonificação por Sucesso e passa a vez para o próximo jogador
+          const acaoLower = acao.toLowerCase();
+          const ehCura = acaoLower.includes("curar") || acaoLower.includes("cura") || acaoLower.includes("vida") || acaoLower.includes("hp");
+          
+          if (ehCura && teste) {
+            setPersonagens((prev) =>
+              prev.map((p, idx) => {
+                if (idx === atorIndex) {
+                  let novoPv = p.pvAtual;
+                  if (teste.critico_sucesso) {
+                    novoPv = p.pvMax;
+                  } else if (teste.sucesso) {
+                    novoPv = Math.min(p.pvMax, p.pvAtual + Math.floor(p.pvMax * 0.4));
+                  }
+                  return {
+                    ...p,
+                    pvAtual: novoPv,
+                    incapacitado: false,
+                    turnosIncapacitadoRestantes: 0,
+                  };
+                }
+                // Sucesso crítico (Nat 20) em cura revitaliza também 30% da party
+                if (teste.critico_sucesso && ehCura) {
+                  const pvRevamp = Math.floor((p.pvMax || 10) * 0.3);
+                  return {
+                    ...p,
+                    pvAtual: Math.min(p.pvMax, p.pvAtual + pvRevamp),
+                  };
+                }
+                return p;
+              })
+            );
+          }
+
+          if (
+            acaoLower.includes("glifo") ||
+            acaoLower.includes("segredo") ||
+            acaoLower.includes("runa") ||
+            acaoLower.includes("decifrar") ||
+            data.bonificacao?.tipo === "revelacao_caminho" ||
+            data.bonificacao?.tipo === "segredo_desvendado"
+          ) {
+            setCaminhoSeguroRevelado(true);
+          }
+
+          // Avanço narrativo orgânico de Atos (Ponto de Encontro -> A Jornada -> O Perímetro -> O Clímax)
+          if (
+            salaDungeon === 1 &&
+            (acaoLower.includes("partir") ||
+              acaoLower.includes("sair") ||
+              acaoLower.includes("estrada") ||
+              acaoLower.includes("viajar") ||
+              acaoLower.includes("norte") ||
+              acaoLower.includes("rumo") ||
+              acaoLower.includes("iniciar viagem") ||
+              acaoLower.includes("ir ao"))
+          ) {
+            setSalaDungeon(2);
+          } else if (
+            caminhoSeguroRevelado &&
+            (acaoLower.includes("caminho seguro") ||
+              acaoLower.includes("seguir pelo caminho") ||
+              acaoLower.includes("avançar pela passagem") ||
+              acaoLower.includes("seguir o caminho") ||
+              acaoLower.includes("rota segura") ||
+              acaoLower.includes("avançar com segurança"))
+          ) {
+            setSalaDungeon((prev) => Math.min(4, prev + 1));
+            setCaminhoSeguroRevelado(false);
+          } else if (
+            salaDungeon === 2 &&
+            (acaoLower.includes("entrar") ||
+              acaoLower.includes("chegar") ||
+              acaoLower.includes("infiltrar") ||
+              acaoLower.includes("adentrar") ||
+              acaoLower.includes("portão") ||
+              acaoLower.includes("ruína") ||
+              acaoLower.includes("santuário"))
+          ) {
+            setSalaDungeon(3);
+          } else if (
+            salaDungeon === 3 &&
+            (acaoLower.includes("covil") ||
+              acaoLower.includes("confrontar") ||
+              acaoLower.includes("demônio") ||
+              acaoLower.includes("chefe") ||
+              acaoLower.includes("profundezas") ||
+              acaoLower.includes("sala final"))
+          ) {
+            setSalaDungeon(4);
+          }
+
           novasMensagens.push({
             id: Math.random().toString(36).substring(2, 9),
             timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
@@ -689,11 +922,26 @@ export default function App() {
   const handleUpdateHp = (novoPv: number) => {
     const alvo = personagemVisualizadoFicha || personagemAtivo;
     if (!alvo) return;
+    const incapacitado = novoPv <= 0;
     setPersonagens((prev) =>
-      prev.map((p) => (p.nome === alvo.nome ? { ...p, pvAtual: novoPv } : p))
+      prev.map((p) =>
+        p.nome === alvo.nome
+          ? {
+              ...p,
+              pvAtual: novoPv,
+              incapacitado,
+              turnosIncapacitadoRestantes: incapacitado && !p.incapacitado ? 5 : (incapacitado ? (p.turnosIncapacitadoRestantes ?? 5) : 0),
+            }
+          : p
+      )
     );
     if (personagemVisualizadoFicha && personagemVisualizadoFicha.nome === alvo.nome) {
-      setPersonagemVisualizadoFicha({ ...personagemVisualizadoFicha, pvAtual: novoPv });
+      setPersonagemVisualizadoFicha({
+        ...personagemVisualizadoFicha,
+        pvAtual: novoPv,
+        incapacitado,
+        turnosIncapacitadoRestantes: incapacitado && !personagemVisualizadoFicha.incapacitado ? 5 : (incapacitado ? (personagemVisualizadoFicha.turnosIncapacitadoRestantes ?? 5) : 0),
+      });
     }
   };
 
@@ -735,6 +983,7 @@ export default function App() {
         campanha={campanha}
         aiStatus={aiStatus}
         emAventura={emAventura}
+        salaDungeon={salaDungeon}
         onAlternarModoVisualizacao={() => setEmAventura(!emAventura)}
         onOpenCharacterCreator={() => setIsCharacterCreatorOpen(true)}
         onOpenCharacterSheet={() => {
@@ -748,6 +997,7 @@ export default function App() {
         onNewCampaign={() => {
           setEmAventura(false);
         }}
+        onOpenSidebar={() => setIsSidebarOpen(true)}
         isProcessing={isProcessing}
       />
 
@@ -784,6 +1034,9 @@ export default function App() {
               personagem={personagemAtivo}
               campanha={campanha}
               isProcessing={isProcessing}
+              caminhoSeguroRevelado={caminhoSeguroRevelado}
+              onAvancarGrupoSeguro={handleAvancarGrupoSeguro}
+              onDecisaoDiferente={handleDecisaoDiferente}
               onSelectSuggestion={(sug) => handleExecuteAcao(sug.acao)}
               onPedirOrientacao={handlePedirOrientacaoDesfecho}
             />
@@ -855,6 +1108,74 @@ export default function App() {
           setIsCharacterCreatorOpen(true);
         }}
       />
+
+      <Sidebar
+        isOpen={isSidebarOpen}
+        onClose={() => setIsSidebarOpen(false)}
+        personagem={personagemAtivo}
+        personagensCount={personagens.length}
+        campanha={campanha}
+        aiStatus={aiStatus}
+        emAventura={emAventura}
+        onAlternarModoVisualizacao={() => setEmAventura(!emAventura)}
+        onOpenCharacterCreator={() => setIsCharacterCreatorOpen(true)}
+        onOpenCharacterSheet={() => {
+          setPersonagemVisualizadoFicha(personagemAtivo);
+          setSheetInitialTab("combate");
+          setIsCharacterSheetOpen(true);
+        }}
+        onOpenDiceRoller={() => setIsDiceRollerOpen(true)}
+        onOpenTelegramConsole={() => setIsTelegramConsoleOpen(true)}
+        onOpenLivroDoJogador={() => setIsLivroModalOpen(true)}
+        onNewCampaign={() => setEmAventura(false)}
+        isProcessing={isProcessing}
+      />
+
+      {/* Modal de Game Over quando todos os jogadores ficam incapacitados */}
+      {emAventura && personagens.length > 0 && personagens.every((p) => p.incapacitado || p.pvAtual <= 0) && (
+        <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 animate-in fade-in duration-300">
+          <div className="bg-stone-900 border-2 border-red-600/80 rounded-2xl p-8 max-w-lg w-full text-center shadow-2xl space-y-6">
+            <div className="w-20 h-20 bg-red-950/80 rounded-full flex items-center justify-center mx-auto border border-red-500/50 text-red-500 text-3xl shadow-inner animate-pulse">
+              ☠️
+            </div>
+            <div className="space-y-2">
+              <h2 className="text-3xl font-serif font-extrabold text-red-500 tracking-wide uppercase">
+                Game Over
+              </h2>
+              <p className="text-stone-300 text-sm leading-relaxed">
+                Todos os aventureiros do grupo caíram incapacitados ao mesmo tempo. A escuridão da masmorra consumiu a esperança e a missão terminou em tragédia...
+              </p>
+            </div>
+            <div className="flex flex-col sm:flex-row gap-3 pt-4">
+              <button
+                onClick={() => {
+                  setPersonagens((prev) =>
+                    prev.map((p) => ({
+                      ...p,
+                      pvAtual: Math.max(1, Math.floor((p.pvMax || 10) * 0.3)),
+                      incapacitado: false,
+                      turnosIncapacitadoRestantes: 0,
+                    }))
+                  );
+                }}
+                className="flex-1 py-3 px-4 bg-amber-600 hover:bg-amber-500 text-white font-semibold rounded-xl transition shadow-lg text-sm"
+              >
+                Ressuscitar Grupo (30% HP)
+              </button>
+              <button
+                onClick={() => {
+                  setEmAventura(false);
+                  setPersonagens([]);
+                  setCampanha(null);
+                }}
+                className="flex-1 py-3 px-4 bg-stone-800 hover:bg-stone-700 text-stone-200 font-semibold rounded-xl transition border border-stone-700 text-sm"
+              >
+                Nova Aventura
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
     </div>
   );
